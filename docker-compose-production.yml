@@ -67,4 +67,5 @@ volumes:
 networks:
   default:
     name: kong-net
+    external: true
 
