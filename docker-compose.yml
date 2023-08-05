@@ -23,6 +23,8 @@ services:
     restart: on-failure
     depends_on:
       - kong-database
+    profiles:
+      - donotstart
 
   kong:
     image: kong
@@ -44,8 +46,6 @@ services:
     ports:
       - 8000:8000
       - 8443:8443
-      - 8001:8001
-      - 8444:8444
     links:
       - kong-database:kong-database
     depends_on:
