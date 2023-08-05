@@ -27,8 +27,6 @@ services:
   kong:
     image: kong
     container_name: kong
-    volumes:
-      - "./ssl:/mnt/ssl"
     environment:
       - LC_CTYPE=en_US.UTF-8
       - LC_ALL=en_US.UTF-8
@@ -41,8 +39,6 @@ services:
       - KONG_ADMIN_ACCESS_LOG=/dev/stdout
       - KONG_PROXY_ERROR_LOG=/dev/stderr
       - KONG_ADMIN_ERROR_LOG=/dev/stderr
-      - KONG_SSL_CERT=/mnt/ssl/ssl.pem
-      - KONG_SSL_CERT_KEY=/mnt/ssl/ssl.key
       - KONG_ADMIN_LISTEN=0.0.0.0:8001, 0.0.0.0:8444 ssl
     restart: on-failure
     ports:
