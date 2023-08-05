@@ -5,6 +5,8 @@ services:
   kong-database:
     image: postgres:9.6
     container_name: kong-database
+    ports:
+      - 5432:5432
     environment:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_DB=${POSTGRES_DB}
@@ -42,8 +44,8 @@ services:
     ports:
       - 8000:8000
       - 8443:8443
-    links:
-      - kong-database:kong-database
+      - 8001:8001
+      - 8444:8444
     depends_on:
       - kong-migrations
 
