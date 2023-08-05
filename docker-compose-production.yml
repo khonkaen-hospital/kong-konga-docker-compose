@@ -6,18 +6,18 @@ services:
     image: postgres:9.6
     container_name: kong-database
     environment:
-      - POSTGRES_USER=kong
-      - POSTGRES_DB=kong
-      - POSTGRES_PASSWORD=your-password
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     volumes:
       - "db-data-kong-postgres:/var/lib/postgresql/data"
 
   kong-migrations:
     image: kong
     environment:
-      - KONG_DATABASE=postgres
+      - KONG_DATABASE=${POSTGRES_DB}
       - KONG_PG_HOST=kong-database
-      - KONG_PG_PASSWORD=your-password
+      - KONG_PG_PASSWORD=${POSTGRES_PASSWORD}
       - KONG_CASSANDRA_CONTACT_POINTS=kong-database
     command: kong migrations bootstrap
     restart: on-failure
@@ -32,10 +32,10 @@ services:
     environment:
       - LC_CTYPE=en_US.UTF-8
       - LC_ALL=en_US.UTF-8
-      - KONG_DATABASE=postgres
+      - KONG_DATABASE=${POSTGRES_DB}
       - KONG_PG_HOST=kong-database
-      - KONG_PG_USER=kong
-      - KONG_PG_PASSWORD=your-password
+      - KONG_PG_USER=${POSTGRES_USER}
+      - KONG_PG_PASSWORD=${POSTGRES_PASSWORD}
       - KONG_CASSANDRA_CONTACT_POINTS=kong-database
       - KONG_PROXY_ACCESS_LOG=/dev/stdout
       - KONG_ADMIN_ACCESS_LOG=/dev/stdout
@@ -67,5 +67,4 @@ volumes:
 networks:
   default:
     name: kong-net
-    external: true
 

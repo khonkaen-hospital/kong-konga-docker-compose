@@ -15,7 +15,7 @@ services:
       - "db-data-kong-postgres:/var/lib/postgresql/data"
 
   kong-migrations:
-    image: kong
+    image: kong:3.3.0-alpine
     environment:
       - KONG_DATABASE=postgres
       - KONG_PG_HOST=kong-database
@@ -27,7 +27,7 @@ services:
       - kong-database
 
   kong:
-    image: kong
+    image: kong:3.3.0-alpine
     container_name: kong
     environment:
       - LC_CTYPE=en_US.UTF-8
