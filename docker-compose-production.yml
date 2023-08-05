@@ -28,8 +28,6 @@ services:
     image: kong
     container_name: kong
     environment:
-      - LC_CTYPE=en_US.UTF-8
-      - LC_ALL=en_US.UTF-8
       - KONG_DATABASE=${POSTGRES_DB}
       - KONG_PG_HOST=kong-database
       - KONG_PG_USER=${POSTGRES_USER}
