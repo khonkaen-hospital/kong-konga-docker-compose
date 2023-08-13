@@ -35,6 +35,7 @@ services:
       - "8443:8443"
       - "8001:8001"
       - "8444:8444"
+      - "8002:8002"
     environment:
       KONG_DATABASE: postgres
       KONG_PG_HOST: kong-database
@@ -47,6 +48,8 @@ services:
       KONG_ADMIN_ERROR_LOG: /dev/stderr
       KONG_ADMIN_LISTEN: 0.0.0.0:8001
       KONG_PROXY_LISTEN: 0.0.0.0:8000
+      KONG_ADMIN_GUI_PATH: /kong
+      KONG_ADMIN_GUI_URL: http://ihos.kkh.go.th/kong
     depends_on:
       - kong-migrations
     networks:
